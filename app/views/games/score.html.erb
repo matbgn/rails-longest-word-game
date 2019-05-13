@@ -1,5 +1,16 @@
 <div class="container">
   <h2>Result</h2>
-  <%= @result %>
+  <% if @result[:type] == 1 %>
+  <p>Sorry but <strong><%= @result[:attempt] %></strong> can't be built out of <%= @result[:letters] %></p>
+  <% end %>
+
+  <% if @result[:type] == 2 %>
+  <p>Sorry but <strong><%= @result[:attempt] %></strong> does not seem to be a valid English word...</p>
+  <% end %>
+
+  <% if @result[:type] == 3 %>
+  <p><strong>Congratulations!</strong> <%= @result[:attempt] %> is a valid English word</p>
+  <% end %>
+
   <p><%= link_to "Play again", new_path %></p>
 </div>

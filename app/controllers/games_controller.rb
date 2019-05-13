@@ -72,10 +72,10 @@ class GamesController < ApplicationController
   end
 
   def final_score(attempt, letters)
-    result = ''
-    result = "Sorry but #{@attempt.upcase} can't be built out of #{@letters.join(',')}" unless in_the_grid?(@attempt, @letters)
-    result = "Sorry but #{@attempt.upcase} does not seem to be a valid English word..." unless english_word?(@attempt)
-    result = "Congratulations! #{@attempt.upcase} is a valid English word" if result.empty?
+    result = {type: 0, attempt: '', letters: ''}
+    result = {type: 1, attempt: @attempt.upcase, letters: @letters.join(',')} unless in_the_grid?(@attempt, @letters)
+    result = {type: 2, attempt: @attempt.upcase, letters: ''} unless english_word?(@attempt)
+    result = {type: 3, attempt: @attempt.upcase, letters: ''} if result[:type].zero?
     return result
   end
 end
